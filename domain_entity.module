@@ -193,8 +193,8 @@ function domain_entity_query_alter(AlterableInterface $query) {
     if (!isset($allowed_types[$entity_type_id])) {
       return;
     }
-    // Skip access check for query with "domain_entity_access_bypass" tag.
-    if ($query->hasTag('domain_entity_access_bypass')) {
+    // Skip access check for query without related tag.
+    if (!$query->hasTag($entity_type_id . '_access')) {
       return;
     }
     // Get primary key of base table from entity type definition.
